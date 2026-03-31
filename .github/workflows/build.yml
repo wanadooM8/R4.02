@@ -8,6 +8,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       checks: write
+      pull-requests: write
+      contents: read
     steps:
       - uses: actions/checkout@v3
       - name: Set up JDK 18
@@ -24,3 +26,10 @@ jobs:
         run:  chmod +x ./gradlew
       - name: Build & test and compute JaCoCo reports
         run: ./gradlew build #jacocoTestReport
+      - name: Publish test report
+        if: always()
+        uses: dorny/test-reporter@v2
+        with:
+          name: Gradle Tests
+          path: build/test-results/test/*.xml
+          reporter: java-junit

@@ -20,11 +20,11 @@ public class PokemonTest {
     @Test
     void premierPokemon_gagne_avec_meilleure_attaque(){
         //GIVEN
-        Pokemon premier = unPokemon().avecAttaque(10).avecAttaque(5).construire();
-        Pokemon second = unPokemon().avecAttaque(5).avecAttaque(5).construire();
+        Pokemon premier = unPokemon().avecAttaque(10).avecDefense(5).construire();
+        Pokemon second = unPokemon().avecAttaque(5).avecDefense(5).construire();
 
         //WHEN
-        Boolean resultat = premier.estVainqueurContre(second);
+        boolean resultat = premier.estVainqueurContre(second);
 
         //THEN
         assertThat(resultat).isTrue(); // le premier pokemon doit gagner
